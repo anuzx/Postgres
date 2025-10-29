@@ -1,13 +1,37 @@
+import express from "express";
 import { Client } from "pg";
-import dotenv from "dotenv";
 
-dotenv.config();
+const app = express();
+app.use(express.json());
 
-const pgClient = new Client(process.env.LINK);
+const pgClient = new Client(
+  process.env.LINK
+);
 
-async function main() {
-    await pgClient.connect(); //we cannot use await in open so we will have to wrap it inside a async fxn
-    const response = await pgClient.query("UPDATE users SET username='Anuj'")
-    console.log(response.rows)
-}
-main();
+pgClient.connect();
+
+app.post("/signup", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const email = req.body.email;
+
+  try {
+    const insertQuery = `INSERT INTO users (username, email, password) VALUES ($1, $2, $3);`;
+    const response = await pgClient.query(insertQuery, [
+      username,
+      email,
+      password,
+    ]);
+
+    res.json({
+      message: "You have signed up",
+    });
+  } catch (e) {
+    console.log(e);
+    res.json({
+      message: "Error while signing up",
+    });
+  }
+});
+
+app.listen(3000);
