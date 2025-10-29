@@ -8,7 +8,7 @@ const pgClient = new Client(process.env.LINK);
 
 pgClient.connect();
 
-//first do this in neon console 
+//first do this in neon console
 /*
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -73,6 +73,37 @@ app.post("/signup", async (req, res) => {
       message: "Error while signing up",
     });
   }
+});
+
+//poor way to join tabels
+app.get("/metadata", async (req, res) => {
+  const id = req.query.id;
+
+  const query1 = `SELECT username, email, id FROM users WHERE id=$1;`;
+  const response1 = await pgClient.query(query1, [id]);
+
+  const query2 = `SELECT * FROM addresses WHERE user_id=$1;`;
+  const response2 = await pgClient.query(query2, [id]);
+
+  res.json({
+    user: response1.rows[0],
+    address: response2.rows,
+  });
+});
+
+//better way of joining
+app.get("/better-metadata", async (req, res) => {
+    const id = req.query.id;
+    
+  const query = `SELECT users.id, users.username, users.email, addresses.city, 
+  addresses.country, addresses.street, addresses.pincode 
+  FROM users JOIN addresses ON users.id = addresses.user_id 
+  WHERE users.id = $1;`;
+
+  const response = await pgClient.query(query, [id]);
+  res.json({
+    response :response.rows
+  });
 });
 
 app.listen(3000, () => console.log("server staretd at 3000"));
