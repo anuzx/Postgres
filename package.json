@@ -1,0 +1,27 @@
+{
+  "name": "postgres-and-sql",
+  "version": "1.0.0",
+  "description": "learning  Postgres and SQL",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc -b && node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuzx/Postgres-and-sql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anuzx/Postgres-and-sql/issues"
+  },
+  "homepage": "https://github.com/anuzx/Postgres-and-sql#readme",
+  "dependencies": {
+    "@types/pg": "^8.15.6",
+    "dotenv": "^17.2.3",
+    "pg": "^8.16.3",
+    "typescript": "^5.9.3"
+  }
+}
