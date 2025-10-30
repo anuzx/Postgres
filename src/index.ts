@@ -107,3 +107,19 @@ app.get("/better-metadata", async (req, res) => {
 });
 
 app.listen(3000, () => console.log("server staretd at 3000"));*/
+import dotenv from "dotenv";
+dotenv.config();
+import { PrismaClient } from "./generated/prisma/client.js";
+
+const client = new PrismaClient();
+
+async function createUser() {
+  await client.user.create({
+    data: {
+      username: "prorpro",
+      password: "12345",
+      age: 21,
+    },
+  });
+}
+createUser();
