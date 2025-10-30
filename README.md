@@ -1,11 +1,11 @@
 # -Postgres-and-Prisma
 learning  Postgres and Prisma
 # project setup
-npm init -y
-npm i typescript 
-npx tsc --init
-uncomment “rootDir” & “outDir”
-npm install prisma 
-npx prisma init
-npm install @prisma/client
+npm init -y<br>
+npm i typescript <br>
+npx tsc --init<br>
+uncomment “rootDir” & “outDir”<br>
+npm install prisma <br>
+npx prisma init<br>
+npm install @prisma/client<br>
 npx prisma generate
