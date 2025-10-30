@@ -1,2 +1,2 @@
-# -Postgres-and-SQL
-learning  Postgres and SQL
+# -Postgres-and-Prisma
+learning  Postgres and Prisma
