@@ -1,4 +1,4 @@
-import express from "express";
+/*import express from "express";
 import { Client } from "pg";
 
 const app = express();
@@ -29,7 +29,7 @@ CREATE TABLE addresses (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );*/
 
-app.post("/signup", async (req, res) => {
+/*app.post("/signup", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
@@ -106,4 +106,4 @@ app.get("/better-metadata", async (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log("server staretd at 3000"));
+app.listen(3000, () => console.log("server staretd at 3000"));*/
