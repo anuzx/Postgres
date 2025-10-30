@@ -11,10 +11,21 @@ datasource db {
 }
 
 model User{
-  id Int @default(autoincrement()) @id
+  id Int @default(autoincrement()) @id //this is to make id a primary key
   username String @unique
   password String
   age Int
 }
 
 //npx prisma migrate dev to migrate 
+
+//todo model 
+model Todo {
+  id           Int @default(autoincrement()) @id 
+  title        String
+  descrtiption String
+  done         Boolean
+  userId       Int
+}
+
+//npx prisma generate
