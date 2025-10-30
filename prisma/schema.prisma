@@ -15,6 +15,7 @@ model User{
   username String @unique
   password String
   age Int
+  todos Todo[]
 }
 
 //npx prisma migrate dev to migrate 
@@ -26,6 +27,7 @@ model Todo {
   descrtiption String
   done         Boolean
   userId       Int
+  user         User @relation(fields: [userId] , references: [id])
 }
 
 //npx prisma generate

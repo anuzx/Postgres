@@ -107,8 +107,12 @@ app.get("/better-metadata", async (req, res) => {
 });
 
 app.listen(3000, () => console.log("server staretd at 3000"));*/
+
+import express from "express";
+const app = express();
 import dotenv from "dotenv";
 dotenv.config();
+//dont put database_link inside " "
 import { PrismaClient } from "./generated/prisma/client.js";
 
 const client = new PrismaClient();
@@ -122,4 +126,46 @@ async function createUser() {
     },
   });
 }
+//make a todo in database using neon and then run this fxn to get a user
+
+//to fetch all users
+app.get("/users", async (req, res) => {
+  const users = await client.user.findMany();
+  res.json({
+    users,
+    message: "all users are here",
+  });
+});
+
+//todos of a specific user
+app.get("/todos/:id", async (req, res) => {
+  const id = req.params.id; //it will be a string
+  const users = await client.user.findFirst();
+  ({
+    where: {
+      id: parseInt(id),
+    },
+    select: {
+      todos: true,
+    },
+  });
+  res.json({
+    users,
+  });
+});
+
+async function getUser() {
+  const user = await client.user.findFirst({
+    where: {
+      id: 1,
+    },
+    include: {
+      todos: true,
+    },
+  });
+  console.log(user);
+}
 createUser();
+getUser();
+
+app.listen(3000);
